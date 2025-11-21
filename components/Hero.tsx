@@ -15,6 +15,7 @@ const Hero: React.FC = () => {
     clientPhone: '',
     details: ''
   });
+  const [emailStatus, setEmailStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
 
   const handleNext = () => setStep((prev) => Math.min(prev + 1, STEPS));
   // const handleBack = () => setStep((prev) => Math.max(prev - 1, 1)); // Optional back button logic
@@ -31,11 +32,26 @@ const Hero: React.FC = () => {
     return `https://wa.me/${WHATSAPP_NUMBER}?text=${text}`;
   };
 
-  const getMailToLink = () => {
-     const subject = `Orçamento BGTECH - ${data.deviceType}`;
-     const body = `Nome: ${data.clientName}%0D%0ATelefone: ${data.clientPhone}%0D%0AAparelho: ${data.deviceType}%0D%0AMarca: ${data.brand}%0D%0ADefeito: ${data.defect}%0D%0ADetalhes: ${data.details}`;
-     return `mailto:contato@bgtech.com.br?subject=${subject}&body=${body}`;
-  }
+  const handleSendEmail = async () => {
+    setEmailStatus('sending');
+    try {
+        await fetch("https://formsubmit.co/ajax/maicongn@hotmail.com", {
+            method: "POST",
+            headers: { 
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({
+                _subject: "novo orçamento BGTECH!",
+                ...data
+            })
+        });
+        setEmailStatus('success');
+    } catch (error) {
+        console.error("Erro ao enviar email", error);
+        setEmailStatus('error');
+    }
+  };
 
   return (
     <section className="relative w-full min-h-[80vh] bg-gray-900 flex items-center overflow-hidden py-12 md:py-0">
@@ -212,13 +228,25 @@ const Hero: React.FC = () => {
                     Enviar via WhatsApp
                 </a>
 
-                <a
-                    href={getMailToLink()}
-                    className="block w-full py-3 bg-gray-100 text-gray-700 rounded-xl font-bold hover:bg-gray-200 transition-all flex items-center justify-center gap-2"
-                >
-                    <IconMail className="w-5 h-5" />
-                    Enviar via E-mail
-                </a>
+                {emailStatus === 'success' ? (
+                    <div className="w-full py-3 bg-green-100 text-green-700 rounded-xl font-bold border border-green-200">
+                        Orçamento enviado por e-mail!
+                    </div>
+                ) : (
+                    <button
+                        onClick={handleSendEmail}
+                        disabled={emailStatus === 'sending'}
+                        className="w-full py-3 bg-gray-100 text-gray-700 rounded-xl font-bold hover:bg-gray-200 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+                    >
+                        {emailStatus === 'sending' ? 'Enviando...' : (
+                            <>
+                                <IconMail className="w-5 h-5" />
+                                Solicitar via E-mail
+                            </>
+                        )}
+                    </button>
+                )}
+                
                 <button onClick={() => setStep(4)} className="text-sm text-gray-400 hover:text-gray-600 mt-4">Editar dados</button>
               </div>
             )}

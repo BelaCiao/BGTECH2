@@ -53,4 +53,4 @@ export const REVIEW_STATS: ReviewStats[] = [
   { stars: 1, percentage: 0 },
 ];
 
-export const WHATSAPP_NUMBER = "555399999999"; // Mock number for Rio Grande format
+export const WHATSAPP_NUMBER = "5553999335369";

@@ -20,8 +20,8 @@
             },
             colors: {
               brand: {
-                red: '#dc2626', // red-600
-                dark: '#111827', // gray-900
+                red: '#dc2626',
+                dark: '#111827',
               }
             },
             animation: {
@@ -31,18 +31,10 @@
             },
             keyframes: {
               blob: {
-                "0%": {
-                  transform: "translate(0px, 0px) scale(1)",
-                },
-                "33%": {
-                  transform: "translate(30px, -50px) scale(1.1)",
-                },
-                "66%": {
-                  transform: "translate(-20px, 20px) scale(0.9)",
-                },
-                "100%": {
-                  transform: "translate(0px, 0px) scale(1)",
-                },
+                "0%": { transform: "translate(0px, 0px) scale(1)" },
+                "33%": { transform: "translate(30px, -50px) scale(1.1)" },
+                "66%": { transform: "translate(-20px, 20px) scale(0.9)" },
+                "100%": { transform: "translate(0px, 0px) scale(1)" },
               },
               fadeInUp: {
                 '0%': { opacity: '0', transform: 'translateY(20px)' },
@@ -51,38 +43,24 @@
             },
           },
         },
-      };
+      }
     </script>
-    <style>
-      body {
-        font-family: 'Inter', sans-serif;
-        overflow-x: hidden;
+    <script type="importmap">
+    {
+      "imports": {
+        "react/": "https://aistudiocdn.com/react@^19.2.0/",
+        "react": "https://aistudiocdn.com/react@^19.2.0",
+        "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+        "recharts": "https://aistudiocdn.com/recharts@^3.4.1",
+        "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0",
+        "vite": "https://aistudiocdn.com/vite@^7.2.4",
+        "@vitejs/plugin-react": "https://aistudiocdn.com/@vitejs/plugin-react@^5.1.1"
       }
-      /* Custom Scrollbar */
-      ::-webkit-scrollbar {
-        width: 8px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #111827;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #dc2626;
-        border-radius: 4px;
-      }
-    </style>
-  <script type="importmap">
-{
-  "imports": {
-    "react": "https://aistudiocdn.com/react@^19.2.0",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
-    "react/": "https://aistudiocdn.com/react@^19.2.0/",
-    "recharts": "https://aistudiocdn.com/recharts@^3.4.1",
-    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0"
-  }
-}
-</script>
-</head>
+    }
+    </script>
+  </head>
   <body class="bg-gray-50 text-gray-800 antialiased">
     <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
   </body>
 </html>

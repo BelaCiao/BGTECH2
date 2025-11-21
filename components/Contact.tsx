@@ -60,24 +60,33 @@ const Contact: React.FC = () => {
             {/* Form Card (Light) */}
             <div className="lg:col-span-3 p-10">
                 <h3 className="text-2xl font-bold text-gray-900 mb-6">Envie uma mensagem</h3>
-                <form className="space-y-6" onSubmit={(e) => { e.preventDefault(); alert('Mensagem enviada! Entraremos em contato em breve.'); }}>
+                <form 
+                    className="space-y-6" 
+                    action="https://formsubmit.co/maicongn@hotmail.com" 
+                    method="POST"
+                >
+                    {/* Configurations for FormSubmit */}
+                    <input type="hidden" name="_subject" value="Novo Contato Site BGTECH" />
+                    <input type="hidden" name="_captcha" value="false" />
+                    <input type="hidden" name="_template" value="table" />
+                    
                     <div className="grid md:grid-cols-2 gap-6">
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-2">Nome Completo</label>
-                            <input type="text" className="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-red-500 focus:ring-2 focus:ring-red-200 outline-none transition-all" required />
+                            <input type="text" name="name" className="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-red-500 focus:ring-2 focus:ring-red-200 outline-none transition-all" required />
                         </div>
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                            <input type="email" className="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-red-500 focus:ring-2 focus:ring-red-200 outline-none transition-all" required />
+                            <input type="email" name="email" className="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-red-500 focus:ring-2 focus:ring-red-200 outline-none transition-all" required />
                         </div>
                     </div>
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">Assunto</label>
-                        <input type="text" className="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-red-500 focus:ring-2 focus:ring-red-200 outline-none transition-all" required />
+                        <input type="text" name="subject" className="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-red-500 focus:ring-2 focus:ring-red-200 outline-none transition-all" required />
                     </div>
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">Mensagem</label>
-                        <textarea rows={4} className="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-red-500 focus:ring-2 focus:ring-red-200 outline-none transition-all resize-none" required></textarea>
+                        <textarea name="message" rows={4} className="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-red-500 focus:ring-2 focus:ring-red-200 outline-none transition-all resize-none" required></textarea>
                     </div>
                     <button type="submit" className="w-full md:w-auto px-8 py-3 bg-red-600 hover:bg-red-700 text-white font-bold rounded-lg shadow-lg transition-all transform hover:scale-105">
                         Enviar Mensagem

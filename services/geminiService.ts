@@ -1,17 +1,9 @@
 import { GoogleGenAI } from "@google/genai";
 
-const apiKey = process.env.API_KEY || '';
-
-// Initialize with specific structure for the new SDK
-const ai = new GoogleGenAI({ apiKey });
+const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 export const sendMessageToGemini = async (message: string): Promise<string> => {
   try {
-    if (!apiKey) {
-        console.warn("API Key missing");
-        return "Desculpe, meu sistema está temporariamente indisponível. Por favor, entre em contato via WhatsApp.";
-    }
-
     const response = await ai.models.generateContent({
       model: 'gemini-2.5-flash',
       contents: message,
