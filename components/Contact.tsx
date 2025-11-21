@@ -20,26 +20,41 @@ const Contact: React.FC = () => {
     setStatus('sending');
 
     try {
-      await fetch("https://formsubmit.co/ajax/maicongn@hotmail.com", {
+      // Criando FormData para garantir entrega robusta via multipart/form-data
+      const body = new FormData();
+      body.append("name", formData.name);
+      body.append("phone", formData.phone);
+      body.append("email", formData.email);
+      body.append("subject", formData.subject);
+      body.append("message", formData.message);
+      
+      // Configurações Especiais do FormSubmit
+      body.append("_subject", `Contato Site: ${formData.subject}`);
+      body.append("_captcha", "false"); // Evita captcha
+      body.append("_template", "table"); // Formata como tabela bonita
+      body.append("_replyto", formData.email); // Permite responder direto ao cliente
+      body.append("_honey", ""); // Honeypot anti-spam
+
+      const response = await fetch("https://formsubmit.co/maicongn@hotmail.com", {
         method: "POST",
+        body: body,
         headers: { 
-          "Content-Type": "application/json",
-          "Accept": "application/json"
-        },
-        body: JSON.stringify({
-          _subject: `Novo Contato Site: ${formData.subject}`,
-          nome: formData.name,
-          telefone: formData.phone,
-          email: formData.email,
-          mensagem: formData.message,
-          _template: "table"
-        })
+            "Accept": "application/json"
+        }
       });
-      setStatus('success');
-      setFormData({ name: '', phone: '', email: '', subject: '', message: '' });
+
+      if (response.ok) {
+        setStatus('success');
+        setFormData({ name: '', phone: '', email: '', subject: '', message: '' });
+      } else {
+        console.error("Erro servidor:", response);
+        setStatus('error');
+        alert("Ocorreu um erro no servidor de email. Tente pelo WhatsApp.");
+      }
     } catch (error) {
-      console.error("Erro ao enviar", error);
+      console.error("Erro rede:", error);
       setStatus('error');
+      alert("Erro de conexão. Por favor, verifique sua internet.");
     }
   };
 
@@ -108,10 +123,14 @@ const Contact: React.FC = () => {
                             <IconCheck className="w-10 h-10" />
                         </div>
                         <h4 className="text-2xl font-bold text-gray-800">Mensagem Enviada!</h4>
-                        <p className="text-gray-600">Obrigado pelo contato. Responderemos em breve no seu e-mail.</p>
+                        <p className="text-gray-600">Recebemos seu contato e responderemos o mais breve possível.</p>
+                        {/* Aviso importante para ativação do FormSubmit */}
+                        <div className="bg-blue-50 p-4 rounded-lg text-xs text-blue-800 max-w-xs mx-auto mt-4">
+                            <strong>Nota:</strong> Verifique seu e-mail (inclusive Spam) para confirmar o recebimento.
+                        </div>
                         <button 
                             onClick={() => setStatus('idle')}
-                            className="mt-6 text-red-600 font-bold hover:text-red-800"
+                            className="mt-6 text-gray-500 font-medium hover:text-gray-800 underline"
                         >
                             Enviar nova mensagem
                         </button>
@@ -186,14 +205,17 @@ const Contact: React.FC = () => {
                             className="w-full md:w-auto px-8 py-3 bg-red-600 hover:bg-red-700 text-white font-bold rounded-lg shadow-lg transition-all transform hover:scale-105 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                         >
                             {status === 'sending' ? (
-                                <>Enviando...</>
+                                <>
+                                   <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                    </svg>
+                                    Enviando...
+                                </>
                             ) : (
                                 <>Enviar Mensagem</>
                             )}
                         </button>
-                        {status === 'error' && (
-                            <p className="text-red-600 text-sm text-center mt-2">Erro ao enviar. Tente novamente ou use o WhatsApp.</p>
-                        )}
                     </form>
                 )}
             </div>

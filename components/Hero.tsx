@@ -34,22 +34,45 @@ const Hero: React.FC = () => {
 
   const handleSendEmail = async () => {
     setEmailStatus('sending');
+    
     try {
-        await fetch("https://formsubmit.co/ajax/maicongn@hotmail.com", {
-            method: "POST",
-            headers: { 
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            },
-            body: JSON.stringify({
-                _subject: "novo orçamento BGTECH!",
-                ...data
-            })
-        });
+      // Usando FormData para simular um formulário HTML real (maior taxa de entrega)
+      const formData = new FormData();
+      
+      // Configurações do FormSubmit
+      formData.append("_subject", `Novo Orçamento: ${data.deviceType} - ${data.clientName}`);
+      formData.append("_template", "table");
+      formData.append("_captcha", "false"); // Desativa captcha para evitar atrito
+      formData.append("_honey", ""); // Campo honeypot para evitar bots reais
+      
+      // Dados do Orçamento
+      formData.append("Cliente", data.clientName);
+      formData.append("Telefone", data.clientPhone);
+      formData.append("Aparelho", data.deviceType || "Não informado");
+      formData.append("Marca", data.brand);
+      formData.append("Defeito", data.defect);
+      formData.append("Detalhes", data.details || "Sem detalhes adicionais");
+      formData.append("Origem", "Site BGTECH - Orçamento Rápido");
+
+      const response = await fetch("https://formsubmit.co/maicongn@hotmail.com", {
+        method: "POST",
+        body: formData,
+        headers: { 
+            "Accept": "application/json" // Importante para não redirecionar a página
+        }
+      });
+
+      if (response.ok) {
         setEmailStatus('success');
-    } catch (error) {
-        console.error("Erro ao enviar email", error);
+      } else {
+        console.error("Erro no envio:", response);
+        alert("Houve um problema técnico no envio. Por favor, use o WhatsApp.");
         setEmailStatus('error');
+      }
+    } catch (error) {
+      console.error("Erro de rede:", error);
+      alert("Erro de conexão. Verifique sua internet ou tente pelo WhatsApp.");
+      setEmailStatus('error');
     }
   };
 
@@ -215,7 +238,7 @@ const Hero: React.FC = () => {
                 </div>
                 <div>
                     <h4 className="text-2xl font-black text-gray-800">Tudo Pronto!</h4>
-                    <p className="text-gray-500 mt-2">Escolha como deseja enviar sua solicitação de orçamento.</p>
+                    <p className="text-gray-500 mt-2">Escolha como deseja enviar sua solicitação.</p>
                 </div>
                 
                 <a
@@ -229,8 +252,9 @@ const Hero: React.FC = () => {
                 </a>
 
                 {emailStatus === 'success' ? (
-                    <div className="w-full py-3 bg-green-100 text-green-700 rounded-xl font-bold border border-green-200">
-                        Orçamento enviado por e-mail!
+                    <div className="w-full py-4 bg-blue-50 text-blue-800 rounded-xl font-bold border border-blue-100 text-sm animate-fade-in-up">
+                        <span className="block text-lg mb-1">✓ Enviado!</span>
+                        <span className="font-normal">Se for a 1ª vez, ative no seu email.</span>
                     </div>
                 ) : (
                     <button
@@ -238,10 +262,18 @@ const Hero: React.FC = () => {
                         disabled={emailStatus === 'sending'}
                         className="w-full py-3 bg-gray-100 text-gray-700 rounded-xl font-bold hover:bg-gray-200 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
                     >
-                        {emailStatus === 'sending' ? 'Enviando...' : (
+                        {emailStatus === 'sending' ? (
+                            <span className="flex items-center gap-2">
+                                <svg className="animate-spin h-5 w-5 text-gray-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                </svg>
+                                Enviando...
+                            </span>
+                        ) : (
                             <>
                                 <IconMail className="w-5 h-5" />
-                                Solicitar via E-mail
+                                Enviar via E-mail (Site)
                             </>
                         )}
                     </button>
