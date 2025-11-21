@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { IconPC, IconLaptop, IconTV, IconMicrowave, IconAudio, IconWhatsApp, IconCheck, IconMail } from './Icons';
 import { BRANDS_MAP, DEFECTS_MAP, WHATSAPP_NUMBER } from '../constants';
 import { DeviceType, WizardData } from '../types';
+import ParticleBackground from './ParticleBackground';
 
 const STEPS = 5;
 
@@ -83,9 +84,16 @@ const Hero: React.FC = () => {
         <img
             src="https://images.unsplash.com/photo-1591405351990-4726e331f141?q=80&w=1920&auto=format&fit=crop"
             alt="Background Tech"
-            className="w-full h-full object-cover opacity-20"
+            className="w-full h-full object-cover opacity-10"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-gray-950 via-gray-900/90 to-gray-900/80"></div>
+        
+        {/* Particle Component Added Here */}
+        <ParticleBackground 
+          particleColor="rgba(255, 255, 255, 0.15)" 
+          lineColor="rgba(255, 255, 255, 0.05)" 
+        />
+
         {/* Red Blob Animation */}
         <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-red-600/20 rounded-full blur-3xl animate-blob mix-blend-screen pointer-events-none"></div>
       </div>
