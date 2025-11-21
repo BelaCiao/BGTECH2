@@ -20,41 +20,44 @@ const Contact: React.FC = () => {
     setStatus('sending');
 
     try {
-      // Criando FormData para garantir entrega robusta via multipart/form-data
-      const body = new FormData();
-      body.append("name", formData.name);
-      body.append("phone", formData.phone);
-      body.append("email", formData.email);
-      body.append("subject", formData.subject);
-      body.append("message", formData.message);
-      
-      // Configurações Especiais do FormSubmit
-      body.append("_subject", `Contato Site: ${formData.subject}`);
-      body.append("_captcha", "false"); // Evita captcha
-      body.append("_template", "table"); // Formata como tabela bonita
-      body.append("_replyto", formData.email); // Permite responder direto ao cliente
-      body.append("_honey", ""); // Honeypot anti-spam
-
-      const response = await fetch("https://formsubmit.co/maicongn@hotmail.com", {
+      // Usando o endpoint /ajax/ para garantir que não haja redirecionamento
+      // e usando JSON para maior compatibilidade
+      const response = await fetch("https://formsubmit.co/ajax/maicongn@hotmail.com", {
         method: "POST",
-        body: body,
         headers: { 
-            "Accept": "application/json"
-        }
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+            _subject: `Contato Site: ${formData.subject}`,
+            _captcha: "false",
+            _template: "table",
+            _replyto: formData.email,
+            
+            // Campos do formulário
+            name: formData.name,
+            phone: formData.phone,
+            email: formData.email,
+            subject: formData.subject,
+            message: formData.message
+        })
       });
 
+      const result = await response.json();
+
       if (response.ok) {
+        console.log("Sucesso:", result);
         setStatus('success');
         setFormData({ name: '', phone: '', email: '', subject: '', message: '' });
       } else {
-        console.error("Erro servidor:", response);
+        console.error("Erro servidor:", result);
         setStatus('error');
-        alert("Ocorreu um erro no servidor de email. Tente pelo WhatsApp.");
+        alert("Ocorreu um erro no servidor de email. Verifique se o email de destino foi ativado (veja caixa de spam).");
       }
     } catch (error) {
       console.error("Erro rede:", error);
       setStatus('error');
-      alert("Erro de conexão. Por favor, verifique sua internet.");
+      alert("Erro de conexão. Verifique se você usa algum bloqueador de anúncios (AdBlock) ou firewall.");
     }
   };
 
@@ -126,7 +129,7 @@ const Contact: React.FC = () => {
                         <p className="text-gray-600">Recebemos seu contato e responderemos o mais breve possível.</p>
                         {/* Aviso importante para ativação do FormSubmit */}
                         <div className="bg-blue-50 p-4 rounded-lg text-xs text-blue-800 max-w-xs mx-auto mt-4">
-                            <strong>Nota:</strong> Verifique seu e-mail (inclusive Spam) para confirmar o recebimento.
+                            <strong>Atenção:</strong> Verifique sua caixa de SPAM (Lixo Eletrônico) no Hotmail para ativar o recebimento na primeira vez.
                         </div>
                         <button 
                             onClick={() => setStatus('idle')}

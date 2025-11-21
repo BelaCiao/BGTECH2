@@ -18,7 +18,6 @@ const Hero: React.FC = () => {
   const [emailStatus, setEmailStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
 
   const handleNext = () => setStep((prev) => Math.min(prev + 1, STEPS));
-  // const handleBack = () => setStep((prev) => Math.max(prev - 1, 1)); // Optional back button logic
 
   const updateData = (field: keyof WizardData, value: any) => {
     setData((prev) => ({ ...prev, [field]: value }));
@@ -36,42 +35,43 @@ const Hero: React.FC = () => {
     setEmailStatus('sending');
     
     try {
-      // Usando FormData para simular um formulário HTML real (maior taxa de entrega)
-      const formData = new FormData();
-      
-      // Configurações do FormSubmit
-      formData.append("_subject", `Novo Orçamento: ${data.deviceType} - ${data.clientName}`);
-      formData.append("_template", "table");
-      formData.append("_captcha", "false"); // Desativa captcha para evitar atrito
-      formData.append("_honey", ""); // Campo honeypot para evitar bots reais
-      
-      // Dados do Orçamento
-      formData.append("Cliente", data.clientName);
-      formData.append("Telefone", data.clientPhone);
-      formData.append("Aparelho", data.deviceType || "Não informado");
-      formData.append("Marca", data.brand);
-      formData.append("Defeito", data.defect);
-      formData.append("Detalhes", data.details || "Sem detalhes adicionais");
-      formData.append("Origem", "Site BGTECH - Orçamento Rápido");
-
-      const response = await fetch("https://formsubmit.co/maicongn@hotmail.com", {
+      // Usando o endpoint /ajax/ específico para SPAs (React) para evitar erros de CORS
+      // e JSON para garantir integridade dos dados.
+      const response = await fetch("https://formsubmit.co/ajax/maicongn@hotmail.com", {
         method: "POST",
-        body: formData,
         headers: { 
-            "Accept": "application/json" // Importante para não redirecionar a página
-        }
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+            _subject: `Novo Orçamento: ${data.deviceType} - ${data.clientName}`,
+            _template: "table",
+            _captcha: "false", // Desativa captcha visual
+            
+            // Dados do Orçamento
+            "Nome do Cliente": data.clientName,
+            "Telefone": data.clientPhone,
+            "Aparelho": data.deviceType || "Não informado",
+            "Marca": data.brand,
+            "Defeito": data.defect,
+            "Detalhes": data.details || "Nenhum detalhe extra",
+            "Origem": "Wizard de Orçamento"
+        })
       });
 
+      const result = await response.json();
+
       if (response.ok) {
+        console.log("Sucesso:", result);
         setEmailStatus('success');
       } else {
-        console.error("Erro no envio:", response);
-        alert("Houve um problema técnico no envio. Por favor, use o WhatsApp.");
+        console.error("Erro no envio:", result);
+        alert("Erro ao enviar. O servidor recusou a conexão. Tente pelo WhatsApp.");
         setEmailStatus('error');
       }
     } catch (error) {
       console.error("Erro de rede:", error);
-      alert("Erro de conexão. Verifique sua internet ou tente pelo WhatsApp.");
+      alert("Erro de conexão. Verifique se você usa algum bloqueador de anúncios (AdBlock) que possa estar impedindo o envio ou tente pelo WhatsApp.");
       setEmailStatus('error');
     }
   };
@@ -254,7 +254,7 @@ const Hero: React.FC = () => {
                 {emailStatus === 'success' ? (
                     <div className="w-full py-4 bg-blue-50 text-blue-800 rounded-xl font-bold border border-blue-100 text-sm animate-fade-in-up">
                         <span className="block text-lg mb-1">✓ Enviado!</span>
-                        <span className="font-normal">Se for a 1ª vez, ative no seu email.</span>
+                        <span className="font-normal">Verifique seu Lixo Eletrônico para confirmar o recebimento.</span>
                     </div>
                 ) : (
                     <button
