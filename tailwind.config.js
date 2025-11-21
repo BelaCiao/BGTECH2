@@ -9,11 +9,14 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
+        tech: ['"Chakra Petch"', 'sans-serif'],
       },
       colors: {
         brand: {
           red: '#dc2626', // red-600
-          dark: '#111827', // gray-900
+          dark: '#030712', // gray-950
+          card: '#111827', // gray-900
+          blue: '#004aad', // Tech blue
         }
       },
       animation: {

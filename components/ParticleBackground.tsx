@@ -6,8 +6,8 @@ interface ParticleBackgroundProps {
 }
 
 const ParticleBackground: React.FC<ParticleBackgroundProps> = ({
-    particleColor = 'rgba(255, 255, 255, 0.5)',
-    lineColor = 'rgba(255, 255, 255, 0.2)'
+    particleColor = 'rgba(220, 38, 38, 0.6)', // Red default
+    lineColor = 'rgba(59, 130, 246, 0.3)'      // Blue default
 }) => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -30,9 +30,9 @@ const ParticleBackground: React.FC<ParticleBackgroundProps> = ({
             constructor() {
                 this.x = Math.random() * canvas!.clientWidth;
                 this.y = Math.random() * canvas!.clientHeight;
-                this.size = Math.random() * 1.5 + 1;
-                this.speedX = Math.random() * 0.4 - 0.2;
-                this.speedY = Math.random() * 0.4 - 0.2;
+                this.size = Math.random() * 2 + 1; // Slightly larger for tech nodes
+                this.speedX = Math.random() * 0.6 - 0.3;
+                this.speedY = Math.random() * 0.6 - 0.3;
             }
 
             update() {
@@ -55,7 +55,7 @@ const ParticleBackground: React.FC<ParticleBackgroundProps> = ({
         const init = () => {
             particles = [];
             // Densidade baseada no tamanho da tela (aproximadamente 1 particula a cada 10000-15000px quadrados)
-            const particleCount = Math.floor((canvas.clientWidth * canvas.clientHeight) / 12000);
+            const particleCount = Math.floor((canvas.clientWidth * canvas.clientHeight) / 10000);
             for (let i = 0; i < particleCount; i++) {
                 particles.push(new Particle());
             }
@@ -80,7 +80,7 @@ const ParticleBackground: React.FC<ParticleBackgroundProps> = ({
                     const dx = particles[a].x - particles[b].x;
                     const dy = particles[a].y - particles[b].y;
                     const distance = Math.sqrt(dx * dx + dy * dy);
-                    const maxDistance = 120; 
+                    const maxDistance = 150; 
 
                     if (distance < maxDistance) {
                         opacityValue = 1 - (distance / maxDistance);
@@ -92,7 +92,7 @@ const ParticleBackground: React.FC<ParticleBackgroundProps> = ({
                         }
                         
                         ctx.strokeStyle = currentLineColor;
-                        ctx.lineWidth = 0.5;
+                        ctx.lineWidth = 0.8; // Thicker lines for tech feel
                         ctx.beginPath();
                         ctx.moveTo(particles[a].x, particles[a].y);
                         ctx.lineTo(particles[b].x, particles[b].y);

@@ -20,8 +20,6 @@ const Contact: React.FC = () => {
     setStatus('sending');
 
     try {
-      // Usando o endpoint /ajax/ para garantir que não haja redirecionamento
-      // e usando JSON para maior compatibilidade
       const response = await fetch("https://formsubmit.co/ajax/maicongn@hotmail.com", {
         method: "POST",
         headers: { 
@@ -33,8 +31,6 @@ const Contact: React.FC = () => {
             _captcha: "false",
             _template: "table",
             _replyto: formData.email,
-            
-            // Campos do formulário
             name: formData.name,
             phone: formData.phone,
             email: formData.email,
@@ -46,94 +42,87 @@ const Contact: React.FC = () => {
       const result = await response.json();
 
       if (response.ok) {
-        console.log("Sucesso:", result);
         setStatus('success');
         setFormData({ name: '', phone: '', email: '', subject: '', message: '' });
       } else {
-        console.error("Erro servidor:", result);
         setStatus('error');
-        alert("Ocorreu um erro no servidor de email. Verifique se o email de destino foi ativado (veja caixa de spam).");
+        alert("Ocorreu um erro no servidor de email.");
       }
     } catch (error) {
-      console.error("Erro rede:", error);
       setStatus('error');
-      alert("Erro de conexão. Verifique se você usa algum bloqueador de anúncios (AdBlock) ou firewall.");
+      alert("Erro de conexão.");
     }
   };
 
   return (
-    <section id="contato" className="py-20 bg-white relative overflow-hidden">
+    <section id="contato" className="py-20 bg-gray-950 relative overflow-hidden">
         {/* Background Blobs */}
-        <div className="absolute left-0 bottom-0 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
-        <div className="absolute right-0 top-0 w-96 h-96 bg-red-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div className="absolute left-0 bottom-0 w-96 h-96 bg-blue-900/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div className="absolute right-0 top-0 w-96 h-96 bg-red-900/10 rounded-full blur-3xl pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="bg-white rounded-3xl shadow-2xl overflow-hidden grid lg:grid-cols-5">
+        <div className="bg-gray-900 rounded border border-gray-800 shadow-2xl overflow-hidden grid lg:grid-cols-5">
             
-            {/* Info Card (Dark) */}
-            <div className="lg:col-span-2 bg-gray-900 p-10 text-white flex flex-col justify-between">
+            {/* Info Card (Darker) */}
+            <div className="lg:col-span-2 bg-black p-10 text-white flex flex-col justify-between border-r border-gray-800">
                 <div>
-                    <h3 className="text-2xl font-bold mb-6">Informações de Contato</h3>
+                    <h3 className="text-2xl font-bold mb-6 font-tech uppercase tracking-wide">Onde Estamos</h3>
                     <p className="text-gray-400 mb-8">Traga seu aparelho para um orçamento sem compromisso. Estacionamento próprio.</p>
                     
                     <div className="space-y-6">
-                        <div className="flex items-start gap-4">
-                            <IconMapPin className="w-6 h-6 text-red-500 mt-1" />
+                        <div className="flex items-start gap-4 group">
+                            <IconMapPin className="w-6 h-6 text-red-600 group-hover:text-red-500 transition-colors mt-1" />
                             <div>
-                                <p className="font-bold text-white">Endereço</p>
-                                <p className="text-gray-400 text-sm">Rua General Bacelar, 123<br/>Centro, Rio Grande - RS</p>
+                                <p className="font-bold text-white font-tech tracking-wide">Endereço</p>
+                                <p className="text-gray-500 text-sm">Rua Almirante Teixeira, 566<br/>São João, Rio Grande - RS</p>
                             </div>
                         </div>
-                        <div className="flex items-start gap-4">
-                            <IconPhone className="w-6 h-6 text-red-500 mt-1" />
+                        <div className="flex items-start gap-4 group">
+                            <IconPhone className="w-6 h-6 text-red-600 group-hover:text-red-500 transition-colors mt-1" />
                             <div>
-                                <p className="font-bold text-white">Telefone</p>
-                                <p className="text-gray-400 text-sm">(53) 3232-0000</p>
-                                <p className="text-gray-400 text-sm">(53) 99993-5369</p>
+                                <p className="font-bold text-white font-tech tracking-wide">Telefone</p>
+                                <p className="text-gray-500 text-sm">(53) 99187-2933</p>
+                                <p className="text-gray-500 text-sm">(53) 99933-5369</p>
                             </div>
                         </div>
-                        <div className="flex items-start gap-4">
-                            <IconMail className="w-6 h-6 text-red-500 mt-1" />
+                        <div className="flex items-start gap-4 group">
+                            <IconMail className="w-6 h-6 text-red-600 group-hover:text-red-500 transition-colors mt-1" />
                             <div>
-                                <p className="font-bold text-white">E-mail</p>
-                                <p className="text-gray-400 text-sm">contato@bgtech.com.br</p>
+                                <p className="font-bold text-white font-tech tracking-wide">E-mail</p>
+                                <p className="text-gray-500 text-sm">maicongn@hotmail.com</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div className="mt-8 relative h-40 bg-gray-800 rounded-xl overflow-hidden group cursor-pointer">
+                <div className="mt-8 relative h-40 bg-gray-800 rounded overflow-hidden group cursor-pointer border border-gray-700">
                     <img 
                         src="https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&q=80&w=600" 
                         alt="Mapa" 
-                        className="w-full h-full object-cover opacity-50 group-hover:opacity-70 transition-opacity"
+                        className="w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity"
                     />
                     <div className="absolute inset-0 flex items-center justify-center">
-                        <span className="bg-white text-gray-900 px-4 py-2 rounded-full text-xs font-bold shadow-lg">
-                            Ver no Google Maps
+                        <span className="bg-red-600 text-white px-4 py-2 rounded text-xs font-bold shadow-lg font-tech uppercase tracking-wide group-hover:bg-red-500 transition-colors">
+                            Ver no Mapa
                         </span>
                     </div>
                 </div>
             </div>
 
-            {/* Form Card (Light) */}
+            {/* Form Card */}
             <div className="lg:col-span-3 p-10">
-                <h3 className="text-2xl font-bold text-gray-900 mb-6">Envie uma mensagem</h3>
+                <h3 className="text-2xl font-bold text-white mb-6 font-tech uppercase tracking-wide">Envie uma mensagem</h3>
                 
                 {status === 'success' ? (
                     <div className="h-full flex flex-col items-center justify-center text-center space-y-4 animate-fade-in-up">
-                        <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center text-green-500 mb-4">
+                        <div className="w-20 h-20 bg-green-900/30 border border-green-600/50 rounded-full flex items-center justify-center text-green-500 mb-4">
                             <IconCheck className="w-10 h-10" />
                         </div>
-                        <h4 className="text-2xl font-bold text-gray-800">Mensagem Enviada!</h4>
-                        <p className="text-gray-600">Recebemos seu contato e responderemos o mais breve possível.</p>
-                        {/* Aviso importante para ativação do FormSubmit */}
-                        <div className="bg-blue-50 p-4 rounded-lg text-xs text-blue-800 max-w-xs mx-auto mt-4">
-                            <strong>Atenção:</strong> Verifique sua caixa de SPAM (Lixo Eletrônico) no Hotmail para ativar o recebimento na primeira vez.
-                        </div>
+                        <h4 className="text-2xl font-bold text-white font-tech">MENSAGEM ENVIADA!</h4>
+                        <p className="text-gray-400">Recebemos seu contato e responderemos o mais breve possível.</p>
                         <button 
                             onClick={() => setStatus('idle')}
-                            className="mt-6 text-gray-500 font-medium hover:text-gray-800 underline"
+                            className="mt-6 text-gray-500 font-medium hover:text-gray-300 underline"
                         >
                             Enviar nova mensagem
                         </button>
@@ -142,62 +131,62 @@ const Contact: React.FC = () => {
                     <form onSubmit={handleSubmit} className="space-y-6">
                         <div className="grid md:grid-cols-2 gap-6">
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-2">Nome Completo</label>
+                                <label className="block text-sm font-medium text-gray-400 mb-2">Nome Completo</label>
                                 <input 
                                     type="text" 
                                     name="name" 
                                     value={formData.name}
                                     onChange={handleChange}
-                                    className="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-red-500 focus:ring-2 focus:ring-red-200 outline-none transition-all" 
+                                    className="w-full px-4 py-3 rounded bg-gray-950 border border-gray-700 text-white focus:border-red-600 focus:ring-1 focus:ring-red-600 outline-none transition-all placeholder-gray-600" 
                                     required 
                                     disabled={status === 'sending'}
                                 />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-2">Telefone / WhatsApp</label>
+                                <label className="block text-sm font-medium text-gray-400 mb-2">Telefone</label>
                                 <input 
                                     type="tel" 
                                     name="phone" 
                                     value={formData.phone}
                                     onChange={handleChange}
-                                    className="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-red-500 focus:ring-2 focus:ring-red-200 outline-none transition-all" 
+                                    className="w-full px-4 py-3 rounded bg-gray-950 border border-gray-700 text-white focus:border-red-600 focus:ring-1 focus:ring-red-600 outline-none transition-all placeholder-gray-600" 
                                     required 
                                     disabled={status === 'sending'}
                                 />
                             </div>
                         </div>
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                            <label className="block text-sm font-medium text-gray-400 mb-2">Email</label>
                             <input 
                                 type="email" 
                                 name="email" 
                                 value={formData.email}
                                 onChange={handleChange}
-                                className="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-red-500 focus:ring-2 focus:ring-red-200 outline-none transition-all" 
+                                className="w-full px-4 py-3 rounded bg-gray-950 border border-gray-700 text-white focus:border-red-600 focus:ring-1 focus:ring-red-600 outline-none transition-all placeholder-gray-600" 
                                 required 
                                 disabled={status === 'sending'}
                             />
                         </div>
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2">Assunto</label>
+                            <label className="block text-sm font-medium text-gray-400 mb-2">Assunto</label>
                             <input 
                                 type="text" 
                                 name="subject" 
                                 value={formData.subject}
                                 onChange={handleChange}
-                                className="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-red-500 focus:ring-2 focus:ring-red-200 outline-none transition-all" 
+                                className="w-full px-4 py-3 rounded bg-gray-950 border border-gray-700 text-white focus:border-red-600 focus:ring-1 focus:ring-red-600 outline-none transition-all placeholder-gray-600" 
                                 required 
                                 disabled={status === 'sending'}
                             />
                         </div>
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2">Mensagem</label>
+                            <label className="block text-sm font-medium text-gray-400 mb-2">Mensagem</label>
                             <textarea 
                                 name="message" 
                                 rows={4} 
                                 value={formData.message}
                                 onChange={handleChange}
-                                className="w-full px-4 py-3 rounded-lg bg-gray-50 border border-gray-200 focus:border-red-500 focus:ring-2 focus:ring-red-200 outline-none transition-all resize-none" 
+                                className="w-full px-4 py-3 rounded bg-gray-950 border border-gray-700 text-white focus:border-red-600 focus:ring-1 focus:ring-red-600 outline-none transition-all resize-none placeholder-gray-600" 
                                 required
                                 disabled={status === 'sending'}
                             ></textarea>
@@ -205,7 +194,7 @@ const Contact: React.FC = () => {
                         <button 
                             type="submit" 
                             disabled={status === 'sending'}
-                            className="w-full md:w-auto px-8 py-3 bg-red-600 hover:bg-red-700 text-white font-bold rounded-lg shadow-lg transition-all transform hover:scale-105 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                            className="w-full md:w-auto px-8 py-3 bg-red-600 hover:bg-red-500 text-white font-bold rounded shadow-lg shadow-red-900/30 transition-all transform hover:scale-105 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2 font-tech uppercase tracking-wide border border-red-500/50"
                         >
                             {status === 'sending' ? (
                                 <>
@@ -213,10 +202,10 @@ const Contact: React.FC = () => {
                                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                                       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                                     </svg>
-                                    Enviando...
+                                    ENVIANDO...
                                 </>
                             ) : (
-                                <>Enviar Mensagem</>
+                                <>ENVIAR MENSAGEM</>
                             )}
                         </button>
                     </form>
