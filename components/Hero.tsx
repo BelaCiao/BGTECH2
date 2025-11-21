@@ -98,13 +98,13 @@ const Hero: React.FC = () => {
             Aberto Agora
           </div>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight">
-            ESPECIALISTAS EM<br />
+            RECUPERAMOS SEU<br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-500">
-              ELETRÔNICA GAMER
+              PC GAMER & NOTEBOOK
             </span>
           </h1>
           <p className="text-gray-400 text-lg md:text-xl max-w-lg mx-auto lg:mx-0">
-            Conserto de PC Gamer, Notebooks e TVs com garantia e procedência. Mais de 10 anos recuperando seus equipamentos.
+            Não deixe seu trabalho ou jogo pararem. Diagnóstico preciso, reparo rápido e garantia total para seu equipamento voltar a ser novo.
           </p>
           <div className="flex flex-wrap gap-3 justify-center lg:justify-start">
              {['Orçamento Gratuito', 'Garantia de 90 dias', 'Técnicos Certificados'].map(tag => (
