@@ -1,3 +1,4 @@
+
 import { DeviceType, ReviewStats, ServiceItem } from './types';
 
 export const BRANDS_MAP: Record<DeviceType, string[]> = {
@@ -23,7 +24,7 @@ export const SERVICES: ServiceItem[] = [
     id: '1',
     title: 'PC Gamer & Desktops',
     description: 'Montagem profissional, cable management, limpeza química, water cooler e upgrades de alta performance.',
-    image: 'https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&q=80&w=600'
+    image: 'https://images.unsplash.com/photo-1624705002806-5d72df19c3ad?auto=format&fit=crop&q=80&w=600'
   },
   {
     id: '2',
@@ -46,9 +47,9 @@ export const SERVICES: ServiceItem[] = [
 ];
 
 export const REVIEW_STATS: ReviewStats[] = [
-  { stars: 5, percentage: 95 },
-  { stars: 4, percentage: 4 },
-  { stars: 3, percentage: 1 },
+  { stars: 5, percentage: 86 },
+  { stars: 4, percentage: 0 },
+  { stars: 3, percentage: 14 },
   { stars: 2, percentage: 0 },
   { stars: 1, percentage: 0 },
 ];

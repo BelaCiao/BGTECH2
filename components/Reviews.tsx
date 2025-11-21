@@ -17,9 +17,10 @@ const Reviews: React.FC = () => {
             </h2>
             <div className="space-y-6">
                 {[
-                    { name: "Carlos Eduardo", text: "Salvaram meu PC Gamer! O atendimento foi excelente e o preço justo. Recomendo demais.", type: "PC Gamer" },
-                    { name: "Ana Paula", text: "Troca de tela do notebook super rápida. Deixei de manhã e peguei a tarde.", type: "Notebook" },
-                    { name: "Roberto Santos", text: "Consertaram minha TV de 60 polegadas que a autorizada tinha condenado. Top!", type: "Smart TV" }
+                    { name: "Belisy A.", text: "Atendimento e profissionalidade!!", type: "Cliente Google" },
+                    { name: "Murilo Rookembaok", text: "Ótimo atendimento!", type: "Cliente Google" },
+                    { name: "Cine Up", text: "Muito bom", type: "Cliente Google" },
+                    { name: "Rafael S.", text: "Profissionais corretos!", type: "Cliente Google" }
                 ].map((review, i) => (
                     <div key={i} className="bg-gray-900 p-6 rounded border border-gray-800 shadow-sm hover:border-gray-700 transition-colors">
                         <div className="flex items-center gap-1 text-yellow-500 mb-2">
@@ -36,7 +37,7 @@ const Reviews: React.FC = () => {
                                 <p className="text-xs text-gray-500 font-mono uppercase">{review.type}</p>
                             </div>
                             <div className="w-10 h-10 bg-gray-800 rounded flex items-center justify-center text-gray-400 font-bold text-xs border border-gray-700">
-                                {review.name.substring(0,2).toUpperCase()}
+                                {review.name.substring(0,1).toUpperCase()}
                             </div>
                         </div>
                     </div>
@@ -47,15 +48,15 @@ const Reviews: React.FC = () => {
           {/* Right: Stats Chart */}
           <div className="bg-gray-900 p-8 rounded-xl shadow-2xl border border-gray-800">
             <div className="text-center mb-8">
-                <span className="text-6xl font-black text-white font-tech">4.9</span>
+                <span className="text-6xl font-black text-white font-tech">4,7</span>
                 <div className="flex justify-center gap-1 text-yellow-500 my-2">
-                    {[1,2,3,4,5].map(star => (
+                    {[1,2,3,4,5].map((star) => (
                         <React.Fragment key={star}>
-                            <IconStar className="w-6 h-6" />
+                             <IconStar className="w-6 h-6" />
                         </React.Fragment>
                     ))}
                 </div>
-                <p className="text-gray-400 text-sm">Baseado em 458 avaliações no Google</p>
+                <p className="text-gray-400 text-sm">Baseado em 7 avaliações no Google</p>
             </div>
 
             <div className="h-64 w-full">
@@ -81,7 +82,7 @@ const Reviews: React.FC = () => {
                         />
                         <Bar dataKey="percentage" barSize={20} radius={[0, 4, 4, 0]}>
                             {REVIEW_STATS.map((entry, index) => (
-                                <Cell key={`cell-${index}`} fill={entry.stars === 5 ? '#DC2626' : '#374151'} />
+                                <Cell key={`cell-${index}`} fill={entry.stars >= 4 ? '#DC2626' : '#374151'} />
                             ))}
                         </Bar>
                     </BarChart>

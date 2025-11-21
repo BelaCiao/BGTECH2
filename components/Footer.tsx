@@ -1,3 +1,4 @@
+
 import React from 'react';
 
 const Footer: React.FC = () => {
@@ -13,8 +14,9 @@ const Footer: React.FC = () => {
              </div>
              <p className="text-gray-500 text-sm">© {new Date().getFullYear()} Todos os direitos reservados.</p>
         </div>
-        <div className="text-xs text-gray-600 pt-4 border-t border-gray-900">
-            CNPJ: 00.000.000/0001-00 | Rua General Bacelar, 123 - Centro, Rio Grande/RS
+        <div className="text-xs text-gray-600 pt-4 border-t border-gray-900 flex flex-col md:flex-row justify-between items-center gap-2">
+            <span>CNPJ: 00.000.000/0001-00 | Rua General Bacelar - Centro, Rio Grande/RS</span>
+            <span className="font-tech uppercase tracking-wide text-gray-700 text-[10px]">Desenvolvido por Maicon G Nascimento</span>
         </div>
       </div>
     </footer>

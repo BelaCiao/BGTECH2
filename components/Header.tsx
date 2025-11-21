@@ -22,7 +22,7 @@ const Header: React.FC = () => {
             <span className="hidden md:block w-px h-3 bg-gray-800"></span>
             <a href={`tel:+${WHATSAPP_NUMBER}`} className="flex items-center gap-2 hover:text-red-500 transition-colors">
                 <IconPhone className="w-3 h-3" />
-                <span className="font-tech tracking-wider">(53) 99999-9999</span>
+                <span className="font-tech tracking-wider font-bold text-red-500">Buscamos seu equipamento.</span>
             </a>
         </div>
       </div>
