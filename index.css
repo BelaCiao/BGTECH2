@@ -1,4 +1,6 @@
-/* Tailwind é carregado via CDN no index.html para evitar problemas de build */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 body {
   font-family: 'Inter', sans-serif;
