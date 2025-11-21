@@ -23,25 +23,25 @@ export const SERVICES: ServiceItem[] = [
     id: '1',
     title: 'PC Gamer & Desktops',
     description: 'Montagem profissional, cable management, limpeza química, water cooler e upgrades de alta performance.',
-    image: 'https://picsum.photos/600/400?random=1'
+    image: 'https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&q=80&w=600'
   },
   {
     id: '2',
     title: 'Notebooks e Laptops',
     description: 'Troca de telas, teclados, reparo de placa-mãe, BGA, formatação e otimização de sistema.',
-    image: 'https://picsum.photos/600/400?random=2'
+    image: 'https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&q=80&w=600'
   },
   {
     id: '3',
     title: 'Smart TVs 4K/8K',
     description: 'Reparo de barramento de LEDs, fontes de alimentação e placas principais. Diagnóstico preciso.',
-    image: 'https://picsum.photos/600/400?random=3'
+    image: 'https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?auto=format&fit=crop&q=80&w=600'
   },
   {
     id: '4',
     title: 'Eletrônicos em Geral',
     description: 'Manutenção em microondas, caixas de som, amplificadores e sistemas de áudio profissional.',
-    image: 'https://picsum.photos/600/400?random=4'
+    image: 'https://images.unsplash.com/photo-1550009158-9ebf69173e03?auto=format&fit=crop&q=80&w=600'
   }
 ];
 
