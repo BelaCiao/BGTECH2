@@ -1,6 +1,6 @@
 import React from 'react';
 import { SERVICES } from '../constants';
-import { IconCheck } from './Icons';
+import { IconCheck, IconGlobe, IconCpu, IconRobot } from './Icons';
 
 const Services: React.FC = () => {
   return (
@@ -37,6 +37,66 @@ const Services: React.FC = () => {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* BGTECH DIGITAL - Banner Promocional */}
+        <div className="mt-16 relative rounded-xl overflow-hidden border border-blue-500/30 bg-gradient-to-br from-gray-950 via-[#0a1020] to-blue-900/20 shadow-[0_0_30px_rgba(59,130,246,0.15)]">
+          {/* Background Elements */}
+          <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600/10 rounded-full blur-[80px] pointer-events-none"></div>
+          <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-600/10 rounded-full blur-[80px] pointer-events-none"></div>
+          
+          <div className="grid md:grid-cols-3 gap-8 p-8 md:p-12 items-center relative z-10">
+            <div className="md:col-span-2 space-y-6">
+               <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-blue-900/30 border border-blue-500/30 text-blue-300 text-[10px] font-bold uppercase tracking-widest font-tech">
+                  <IconCpu className="w-3 h-3" />
+                  BGTECH DIGITAL SOLUTIONS
+               </div>
+               <h3 className="text-3xl md:text-4xl font-black text-white font-tech leading-tight">
+                  SUA EMPRESA NO FUTURO COM <br/>
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300 drop-shadow-[0_0_10px_rgba(59,130,246,0.5)]">
+                    LIA DIGITAL & SITES DE ALTA PERFORMANCE
+                  </span>
+               </h3>
+               <p className="text-gray-300 text-lg leading-relaxed">
+                  Não consertamos apenas hardware. Criamos soluções digitais. Conheça a 
+                  <span className="text-white font-bold"> Lia Digital</span>, a secretária com Inteligência Artificial que atende seus clientes 24h, e desenvolvemos sites institucionais que vendem por você.
+               </p>
+               
+               <div className="flex flex-wrap gap-4">
+                  <div className="flex items-center gap-2 text-gray-400 bg-gray-900/50 px-4 py-2 rounded border border-gray-800">
+                     <IconRobot className="w-5 h-5 text-blue-400" />
+                     <span className="text-sm font-medium">Chatbots com IA</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-gray-400 bg-gray-900/50 px-4 py-2 rounded border border-gray-800">
+                     <IconGlobe className="w-5 h-5 text-cyan-400" />
+                     <span className="text-sm font-medium">Criação de Sites</span>
+                  </div>
+               </div>
+            </div>
+            
+            <div className="flex flex-col justify-center items-center md:items-end space-y-4 border-t md:border-t-0 md:border-l border-gray-800 pt-8 md:pt-0 md:pl-8">
+               <p className="text-gray-400 text-sm text-center md:text-right">
+                  Quer um site moderno ou uma IA para seu negócio?
+               </p>
+               <a 
+                  href="https://bgtechdigital2.vercel.app/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="group relative px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded overflow-hidden shadow-lg shadow-blue-900/40 transition-all font-tech tracking-wide text-center w-full md:w-auto"
+               >
+                  <span className="relative z-10 flex items-center justify-center gap-2">
+                     ACESSAR BGTECH DIGITAL
+                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4 group-hover:translate-x-1 transition-transform">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                     </svg>
+                  </span>
+                  <div className="absolute inset-0 -translate-x-full group-hover:translate-x-0 bg-gradient-to-r from-cyan-500 to-blue-600 transition-transform duration-300 ease-out"></div>
+               </a>
+               <p className="text-xs text-blue-500/70 font-mono text-center md:text-right uppercase">
+                  *Tecnologia exclusiva BGTECH
+               </p>
+            </div>
+          </div>
         </div>
 
         {/* Amenities Banner */}
